@@ -1,0 +1,160 @@
+---
+title: "Introdução ao mundo *tidyverse*"
+#subtitle: "Seção 02 - Introdução ao mundo *tidyverse*"
+author: "Vítor Wilher"
+output: 
+  beamer_presentation:
+    #theme: "Boadilla"
+    slide_level: 2
+    fig_width: 8
+    fig_height: 4
+    fig_caption: true
+    citation_package: 'natbib'
+    includes:
+      in_header: beamer.txt
+      before_body: toc.txt
+bibliography: 'references.bib'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+def.chunk.hook  <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  x <- def.chunk.hook(x, options)
+  ifelse(options$size != "normalsize", paste0("\\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+})
+
+```
+
+
+
+# Introdução
+## Introdução
+
+O avanço da informática e das telecomunicações possibilitou o armazenamento e a distribuição de conjuntos de dados cada vez mais complexos. Lidar com essas bases de dados exigiu a sistematização de diversas técnicas de coleta, tratamento, análise e apresentação de dados. 
+
+\bigskip
+
+Essa sistematização de técnicas deu origem ao que hoje chamamos de \textbf{data science}, cujo objetivo principal é extrair informações úteis de conjuntos de dados aparentemente confusos. 
+
+## Introdução
+
+\begin{block}{Aplicações interessantes:}
+
+\begin{itemize}
+
+  \item Identificar mensagens indesejáveis em um e-mail (spam);
+  
+  \item Segmentação do comportamento de consumidores para propagandas direcionadas;
+  
+  \item Redução de fraudes em transações de cartão de crédito;
+  
+  \item Predição de eleições;
+  
+  \item Otimização do uso de energia em casas ou prédios;
+  
+  \item etc, etc, etc...
+
+\end{itemize}
+\end{block}
+
+
+## Introdução
+
+Ao coletar dados, introduzimos em uma plataforma de Análise de Dados (como o R) informações coletadas no mundo real. Seja vindas de  base de dados prontas ou adquiridas minerando dados abertos em sites. Depois tratamos as informações para que sejam devidamente legíveis para um computador e bem formatadas para nosso próprio entendimento. Então começamos a análise propriamente dita. Visualizamos os dados, procurando perguntas interessantes e padrões, depois avaliamos nossas intuições com modelos estatísticos. Por fim, comunicamos nossos achados - afinal de pouco importa achar algo somente para si.
+
+## Introdução
+
+![O processo de compreensão dos dados (@r4ds)](datascience.png)
+
+# Coleta e Tratamento
+## Coleta e Tratamento
+
+Dados podem estar dispostos em diferentes formatos:
+
+\bigskip
+
+\begin{itemize}
+
+  \item Excel;
+  
+  \item XML;
+  
+  \item JSON;
+  
+  \item txt;
+  
+  \item HTML;
+  
+  \item MySQL;
+  
+  \item Formatos proprietários (Weka, Stata, Minitab, Octave, SPSS, SAS, etc).
+
+\end{itemize}
+
+## Coleta e Tratamento
+
+Dados precisam ser tratados:
+
+\bigskip
+
+\begin{itemize}
+
+  \item Limpeza de dados;
+  
+  \item Tratamento de \emph{missing values};
+  
+  \item Construção de números índices;
+  
+  \item Deflacionar valores correntes;
+  
+  \item Obtenção de taxas de crescimento, a partir de comparações mensais, interanuais, acumuladas em 12 meses, etc;
+  
+  \item Tratando tendências;
+  
+  \item Dessazonalização;
+  
+  \item Obtendo subconjuntos (\emph{subsetting}) relevantes;
+  
+  \item Classificando dados de acordo com algum critério;
+  
+  \item Transformando dados de acordo com alguma operação.
+  
+\end{itemize}
+
+
+# Exploração
+## Exploração
+
+Uma vez que seus dados estejam arrumados, podemos passar para a parte de **exploração dos dados**. A exploração de dados é a arte de analisar seus dados, gerando hipóteses rapidamente, testando-os rapidamente, repetindo-os várias vezes. O objetivo da exploração de dados é gerar muitos leads promissores que você poderá explorar mais tarde com mais profundidade. Em geral, faz-se exploração de dados por meio da *visualização* dos mesmos. 
+
+\bigskip
+
+Um bom processo de visualização de dados permite que possamos nos concentrar naquilo que realmente importa, deixando de lado relações não tão importantes. 
+
+# Modelagem
+## Modelagem
+
+Uma vez que tenhamos conseguido propor uma *hipótese de trabalho* através da etapa de exploração/visualização de dados, o próximo passo é propor um **modelo** entre as variáveis do nosso conjunto de dados. O objetivo da modelagem é capturar a essência de um conjunto de dados.
+
+# Comunicação
+## Comunicação
+
+A última etapa do processo de *data science* é comunicar os resultados para clientes, gestores ou demais interessados. É uma fase absolutamente crítica do projeto. Isto porque, ao menos que você consiga se comunicar com a sua audiência, de nada valeu todo o trabalho realizado nas etapas anteriores. 
+
+# A família *tidyverse*
+## A família *tidyverse*
+
+De modo a fazer cada uma dessas etapas dentro do R, nós vamos utilizar a família de pacotes `tidyverse`. Assim, antes de qualquer coisa, certifique-se que você tenha o tenha instalado na atual versão do R.
+
+```{r code1, echo=T, eval=F, results='markup', warning=FALSE, message=FALSE, size='tiny'}
+
+install.packages('tidyverse')
+require(tidyverse)
+
+```
+
+## A família *tidyverse*
+
+![Os pacotes `tidyverse` (@r4ds)](tidyverse.png)
+

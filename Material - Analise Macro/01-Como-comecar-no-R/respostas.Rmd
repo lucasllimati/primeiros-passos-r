@@ -1,0 +1,54 @@
+---
+title: "Respostas da Lista XX - Curso de XXXXX"
+author: "INSIRA SEU NOME AQUI"
+date: "INSIRA DATA AQUI"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instruções 
+
+Abaixo estão chunks de código já configurados. Escreva seu código de resposta dentro dele e depois renderize o documento com o comando ``Knit``. O botão que o aplica normalmente fica no canto superior esquerdo, tem o símbolo de um nobelo de tecido e "Knit" escrito ao lado.
+
+Antes de renderizar o documento, troque as informações no cabeçalho já pronto pelas apropriadas. Curso, número da lista, seu nome e data. 
+
+Se a lista tiver mais questões (ou menos) do que o número pronto, você só precisa copiar um chunk e cola-lo abaixo do último. Não se esqueça de conferir o número da questão sendo respondida. 
+
+# Questão 1
+
+```{R, warning = FALSE, message = FALSE, dpi = 500, results = "assis"}
+### INSIRA SEU CÓDIGO AQUI
+```
+
+# Questão 2
+
+```{R, warning = FALSE, message = FALSE, dpi = 500, results = "assis"}
+### INSIRA SEU CÓDIGO AQUI
+```
+
+# Questão 3
+
+```{R, warning = FALSE, message = FALSE, dpi = 500, results = "assis"}
+### INSIRA SEU CÓDIGO AQUI
+```
+
+# Questão 4
+
+```{R, warning = FALSE, message = FALSE, dpi = 500, results = "assis"}
+### INSIRA SEU CÓDIGO AQUI
+```
+
+# Questão 5
+
+```{R, warning = FALSE, message = FALSE, dpi = 500, results = "assis"}
+### INSIRA SEU CÓDIGO AQUI
+```
+
+# Questão 6
+
+```{R, warning = FALSE, message = FALSE, dpi = 500, results = "assis"}
+### INSIRA SEU CÓDIGO AQUI
+```
