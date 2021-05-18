@@ -1,0 +1,113 @@
+---
+title: "Monitor de Inflação"
+subtitle: '**Clube AM**'
+author: 'Lucas Lima'
+output:
+  beamer_presentation:
+    slide_level: 2
+    fig_width: 8
+    fig_height: 4
+    fig_caption: true
+    citation_package: 'natbib'
+    includes:
+      in_header: beamer.txt
+      before_body: toc.txt
+bibliography: 'references.bib'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+def.chunk.hook  <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  x <- def.chunk.hook(x, options)
+  ifelse(options$size != "normalsize", paste0("\\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+})
+
+```
+
+# Introdução
+## Introdução
+
+Essa apresentação é feita em `RMarkdown`, integrando as etapas de coleta, tratamento, análise e apresentação de dados de inflação. 
+
+```{r, echo=F, eval=T, results='asis', fig.cap='', fig.width=8, fig.height=4, fig.align='center', out.width=".8\\linewidth", warning=FALSE, message=FALSE, size='tiny'}
+
+## Carregar pacotes
+library(vars)
+library(gridExtra)
+library(tidyverse)
+library(readxl)
+library(sidrar)
+library(forecast)
+library(tstools)
+library(scales)
+library(ggrepel)
+library(BETS)
+library(xtable)
+library(lubridate)
+library(RcppRoll)
+library(knitr)
+library(fpp3)
+library(xts)
+library(reshape2)
+library(rbcb)
+```
+
+# Panorama Geral da Inflação
+## Panorama Geral da Inflação
+
+```{r, echo=F, eval=T, results='asis', fig.cap='', fig.width=8, fig.height=4, fig.align='center', out.width="1\\linewidth", warning=FALSE, message=FALSE, size='tiny'}
+
+
+ipca_indice = 
+  '/t/1737/n1/all/v/2266/p/all/d/v2266%2013' %>%
+  get_sidra(api=.) %>%
+  mutate(date = ymd(paste0(`Mês (Código)`, '01'))) %>%
+  dplyr::select(date, Valor) %>%
+  mutate(mensal = round((Valor/lag(Valor,1)-1)*100, 2),
+         anual = round((Valor/lag(Valor,12)-1)*100, 2))
+
+
+ipca_indice %>%
+  filter(date > '2007-06-01') %>%
+  gather(variavel, valor, -date) %>%
+  ggplot(aes(x=date, y=valor, colour=variavel))+
+  geom_line(size=.8)+
+  facet_wrap(~variavel, scales='free')+
+  theme(legend.position = 'none')
+```
+## Panorama Geral da Inflação
+
+```{r, echo=F, eval=T, results='asis', fig.cap='', fig.width=8, fig.height=4, fig.align='center', out.width="1\\linewidth", warning=FALSE, message=FALSE, size='tiny'}
+
+ipca_indice %>%
+  tail() %>%
+  kable(digits=2)
+
+```
+
+## Panorama Geral da Inflação
+
+```{r, echo=F, eval=T, results='asis', fig.cap='', fig.width=8, fig.height=4, fig.align='center', out.width="1\\linewidth", warning=FALSE, message=FALSE, size='tiny'}
+
+ipca_indice %>%
+  filter(date > '2014-01-01') %>%
+  ggplot(aes(x=date, y=mensal))+
+  geom_line(size=.8)+
+  labs(x='', y='',
+       title='Inflação mensal medida pelo IPCA')
+
+
+```
+
+## Panorama Geral da Inflação
+
+```{r, echo=F, eval=T, results='asis', fig.cap='', fig.width=8, fig.height=4, fig.align='center', out.width="1\\linewidth", warning=FALSE, message=FALSE, size='tiny'}
+
+ipca_indice %>%
+  filter(date > '2014-01-01') %>%
+  ggplot(aes(x=date, y=anual))+
+  geom_line(size=.8)+
+  labs(title='Inflação acumulada em 12 meses medida pelo IPCA')
+
+```
